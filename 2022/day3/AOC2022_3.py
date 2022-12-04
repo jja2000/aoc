@@ -22,7 +22,21 @@ if sys.argv[2] == '1':
         for l in letters:
             if r[0].count(l) and r[1].count(l) > 0:
                 prioritySum += letters.index(l) + 1
-    
-    print(prioritySum)
 elif sys.argv[2] == '2':
-    print("solution for part 2")
+    index = 0
+    groups = []
+    group = []
+    for l in lines:
+        index += 1
+        group.append(l)
+        if index == 3:
+            index = 0
+            groups.append(group)
+            group = []
+    
+    for g in groups:
+        for l in letters:
+            if g[0].count(l) and g[1].count(l) and g[2].count(l) > 0:
+                prioritySum += letters.index(l) + 1
+
+print(prioritySum)
