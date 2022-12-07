@@ -32,16 +32,26 @@ for l in lines:
         if not fileList.count(file):
             fileList.append((l[0], file))
 
+for f in fileList:
+    for i in range(1, len(f[1])):
+        for d in dirList:
+            if f[1][:-i] == d[0]:
+                d[1] += int(f[0])
+result = 0
+
 if sys.argv[2] == '1':
-    for f in fileList:
-        for i in range(1, len(f[1])):
-            for d in dirList:
-                if f[1][:-i] == d[0]:
-                    d[1] += int(f[0])
-    result = 0
     for d in dirList:
         if d[1] <= 100000:
             result += d[1]
     print("The solution for part 1:", result)
 elif sys.argv[2] == '2':
-    print("The solution for part 2:") 
+    def sortFunc(e):
+        return e[1]
+    dirList.sort(key=sortFunc)
+    currentFree = 70000000 - dirList[-1][1]
+    targetDirSize = 30000000 - currentFree
+    for d in dirList:
+        if d[1] >= targetDirSize:
+            result = d[1]
+            break
+    print("The solution for part 2:", result) 
