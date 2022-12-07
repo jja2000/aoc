@@ -34,7 +34,7 @@ for l in lines:
 
 if sys.argv[2] == '1':
     for f in fileList:
-        for i in range(1, len(f[1]) - 1):
+        for i in range(1, len(f[1])):
             for d in dirList:
                 if f[1][:-i] == d[0]:
                     d[1] += int(f[0])
