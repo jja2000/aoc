@@ -1,4 +1,4 @@
-import sys, numpy
+import sys
 
 print("Hi! You've used", sys.argv[1], "as input.")
 print("You've chosen to calculate the answer for part", sys.argv[2]+".")
