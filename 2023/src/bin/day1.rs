@@ -1,6 +1,5 @@
 use std::env;
 use std::fs;
-use std::str::FromStr;
 
 fn part1<'a>(mut input: impl Iterator<Item = &'a str>) -> i32 {
     let mut result: i32 = 0;
@@ -29,48 +28,47 @@ fn part2<'a>(mut input: impl Iterator<Item = &'a str>) -> i32 {
     let mut result: i32 = 0;
     for line in input.by_ref() {
         // Executed per line of input
-        let mut number = String::new();
         let mut low: i32 = -1;
         let mut high: i32 = -1;
-        let mut lowString = 0;
-        let mut highString = 0;
-        let mut optionsIter = options.iter();
-        for (i, option) in optionsIter.enumerate() {
+        let mut low_string = 0;
+        let mut high_string = 0;
+        let options_iter = options.iter();
+        for (i, option) in options_iter.enumerate() {
             let test = line.find(option);
             if test.is_none() {
                 continue;
             }
             else {
-                let lowTest = line.find(option).unwrap() as i32;
-                let highTest = line.rfind(option).unwrap() as i32;
+                let low_test = line.find(option).unwrap() as i32;
+                let high_test = line.rfind(option).unwrap() as i32;
                 if low == -1 {
-                    low = lowTest;
-                    lowString = i;
+                    low = low_test;
+                    low_string = i;
                 }
-                else if low > lowTest {
-                    low = lowTest;
-                    lowString = i;
+                else if low > low_test {
+                    low = low_test;
+                    low_string = i;
                 }
     
                 if high == -1 {
-                    high = highTest;
-                    highString = i;
+                    high = high_test;
+                    high_string = i;
                 }
-                else if high < highTest {
-                    high = highTest;
-                    highString = i;
+                else if high < high_test {
+                    high = high_test;
+                    high_string = i;
                 }
             }
         }
 
-        if lowString >= 10 {
-            lowString -= 10;
+        if low_string >= 10 {
+            low_string -= 10;
         }
 
-        if highString >= 10 {
-            highString -= 10;
+        if high_string >= 10 {
+            high_string -= 10;
         }
-        number = options[lowString].to_owned() + options[highString];
+        let number: String = options[low_string].to_owned() + options[high_string];
         result += number.parse::<i32>().unwrap();
     }
     result
